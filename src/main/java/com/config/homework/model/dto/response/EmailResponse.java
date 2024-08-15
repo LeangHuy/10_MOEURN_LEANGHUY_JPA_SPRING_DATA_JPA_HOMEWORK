@@ -9,10 +9,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
-public class CustomerResponse {
+public class EmailResponse {
     private UUID id;
-    private String name;
-    private String address;
-    private String phoneNumber;
-    private EmailResponse email;
+    private String email;
 }

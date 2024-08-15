@@ -1,5 +1,6 @@
 package com.config.homework.model.entities;
 
+import com.config.homework.model.dto.response.EmailResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,4 +20,8 @@ public class Email {
     private String email;
     @OneToOne(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, optional = false)
     private Customer customer;
+
+    public EmailResponse toResponse() {
+        return new EmailResponse(this.id,this.email);
+    }
 }

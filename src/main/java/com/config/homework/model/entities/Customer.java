@@ -1,5 +1,7 @@
 package com.config.homework.model.entities;
 
+import com.config.homework.model.dto.response.CustomerResponse;
+import com.config.homework.model.dto.response.EmailResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,4 +29,10 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    public CustomerResponse toResponse(){
+        EmailResponse emailResponse = email.toResponse();
+        return new CustomerResponse(this.id, this.customerName, this.address,this.phoneNumber, emailResponse);
+    }
+
 }

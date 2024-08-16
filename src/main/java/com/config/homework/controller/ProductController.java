@@ -83,4 +83,19 @@ public class ProductController {
                 .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete product by id.")
+    private ResponseEntity<ApiResponse<ProductResponse>> deleteProduct(
+            @PathVariable UUID id
+    ) {
+        productService.deleteProductById(id);
+        ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
+                .message("Product with id ("+id+") is deleted successfully.")
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

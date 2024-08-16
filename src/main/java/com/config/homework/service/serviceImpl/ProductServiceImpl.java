@@ -44,4 +44,10 @@ public class ProductServiceImpl implements ProductService {
         getProductById(productId);
         return productRepository.save(productRequest.toEntity(productId)).toResponse();
     }
+
+    @Override
+    public void deleteProductById(UUID productId) {
+        getProductById(productId);
+        productRepository.deleteById(productId);
+    }
 }

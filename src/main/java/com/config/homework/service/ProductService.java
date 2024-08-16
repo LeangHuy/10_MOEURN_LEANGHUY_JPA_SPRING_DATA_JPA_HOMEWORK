@@ -12,5 +12,6 @@ public interface ProductService {
     List<ProductResponse> getAllProducts(int page, int size, String sortBy, Sort.Direction sortDirection);
     ProductResponse getProductById(UUID productId);
     ProductResponse updateProductById(UUID productId,ProductRequest productRequest);
+    void deleteProductById(UUID productId);
 
 }

@@ -1,10 +1,12 @@
 package com.config.homework.service.serviceImpl;
 
+import com.config.homework.exception.ConflictException;
 import com.config.homework.exception.NotFoundException;
 import com.config.homework.model.dto.request.CustomerRequest;
 import com.config.homework.model.dto.response.CustomerResponse;
 import com.config.homework.model.entities.Customer;
 import com.config.homework.repository.CustomerRepository;
+import com.config.homework.repository.EmailRepository;
 import com.config.homework.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,9 +21,14 @@ import java.util.*;
 @AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final EmailRepository emailRepository;
 
     @Override
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
+        Boolean unitEmail = emailRepository.existsByEmail(customerRequest.getEmail());
+        if (unitEmail) {
+            throw new ConflictException("Email already exists");
+        }
         return customerRepository.save(customerRequest.toCustomerEntity(customerRequest.getEmail())).toResponse();
     }
 

@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,7 +36,4 @@ public class CustomerRequest {
         Email emails = new Email(null,email,null);
         return new Customer(null,this.customerName,this.address,this.phoneNumber,emails,null);
     }
-//    public com.config.homework.model.entities.Email toEmailEntity(String email){
-//        return new com.config.homework.model.entities.Email(null,email,null);
-//    }
 }

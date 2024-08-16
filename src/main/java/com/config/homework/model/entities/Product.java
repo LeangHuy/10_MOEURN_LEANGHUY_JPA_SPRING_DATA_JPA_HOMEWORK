@@ -1,5 +1,6 @@
 package com.config.homework.model.entities;
 
+import com.config.homework.model.dto.response.ProductResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,4 +27,7 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductOrder> productOrders;
 
+    public ProductResponse toResponse() {
+        return new ProductResponse(this.id,this.productName,this.unitPrice,this.description);
+    }
 }

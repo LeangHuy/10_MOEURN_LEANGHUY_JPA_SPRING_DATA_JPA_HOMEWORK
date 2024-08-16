@@ -42,8 +42,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse updateCustomerById(UUID customerId,CustomerRequest customerRequest) {
-        getCustomerById(customerId);
-        return customerRepository.save(customerRequest.toCustomerEntity(customerRequest.getEmail())).toResponse();
+        CustomerResponse customerResponse = getCustomerById(customerId);
+        return customerRepository.save(customerRequest.toCustomerEntity(customerId,customerRequest.getEmail(),customerResponse.getEmail().getId())).toResponse();
     }
 
 

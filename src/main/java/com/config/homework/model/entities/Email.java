@@ -18,7 +18,7 @@ public class Email {
     private UUID id;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToOne(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, optional = false)
+    @OneToOne(mappedBy = "email")
     private Customer customer;
 
     public EmailResponse toResponse() {

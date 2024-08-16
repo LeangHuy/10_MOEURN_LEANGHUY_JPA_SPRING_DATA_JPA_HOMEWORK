@@ -10,5 +10,5 @@ import java.util.UUID;
 @Getter
 @Builder
 public class OrderResponse {
-    private UUID id;
+    public UUID id;
 }

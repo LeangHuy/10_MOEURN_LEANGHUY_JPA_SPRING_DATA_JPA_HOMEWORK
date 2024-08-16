@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.util.Set;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,5 +37,10 @@ public class CustomerRequest {
     public Customer toCustomerEntity(String email){
         Email emails = new Email(null,email,null);
         return new Customer(null,this.customerName,this.address,this.phoneNumber,emails,null);
+    }
+
+    public Customer toCustomerEntity(UUID id, String email,UUID emailId){
+        Email emails = new Email(emailId,email,null);
+        return new Customer(id,this.customerName,this.address,this.phoneNumber,emails,null);
     }
 }

@@ -1,7 +1,7 @@
 package com.config.homework.model.dto.request;
 
 import com.config.homework.model.entities.Customer;
-import jakarta.validation.constraints.Email;
+import com.config.homework.model.entities.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -30,13 +30,14 @@ public class CustomerRequest {
     private String phoneNumber;
     @NotBlank
     @NotNull
-    @Email
+    @jakarta.validation.constraints.Email
     private String email;
 
-    public Customer toCustomerEntity(com.config.homework.model.entities.Email emails){
+    public Customer toCustomerEntity(String email){
+        Email emails = new Email(null,email,null);
         return new Customer(null,this.customerName,this.address,this.phoneNumber,emails,null);
     }
-    public com.config.homework.model.entities.Email toEmailEntity(String email){
-        return new com.config.homework.model.entities.Email(null,email,null);
-    }
+//    public com.config.homework.model.entities.Email toEmailEntity(String email){
+//        return new com.config.homework.model.entities.Email(null,email,null);
+//    }
 }

@@ -19,7 +19,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
-    private String customerName;
+    private String name;
     @Column(nullable = false)
     private String address;
     @Column(nullable = false)
@@ -32,7 +32,7 @@ public class Customer {
 
     public CustomerResponse toResponse(){
         EmailResponse emailResponse = email.toResponse();
-        return new CustomerResponse(this.id, this.customerName, this.address,this.phoneNumber, emailResponse);
+        return new CustomerResponse(this.id, this.name, this.address,this.phoneNumber, emailResponse);
     }
 
 }

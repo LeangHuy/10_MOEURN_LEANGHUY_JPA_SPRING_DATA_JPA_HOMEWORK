@@ -24,7 +24,7 @@ public class Product {
     private BigDecimal unitPrice;
     @Column(nullable = false)
     private String description;
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductOrder> productOrders;
 
     public ProductResponse toResponse() {

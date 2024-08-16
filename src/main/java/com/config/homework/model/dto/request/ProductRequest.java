@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,5 +27,9 @@ public class ProductRequest {
 
     public Product toEntity(){
         return new Product(null,this.productName,this.unitPrice,this.description,null);
+    }
+
+    public Product toEntity(UUID id){
+        return new Product(id,this.productName,this.unitPrice,this.description,null);
     }
 }

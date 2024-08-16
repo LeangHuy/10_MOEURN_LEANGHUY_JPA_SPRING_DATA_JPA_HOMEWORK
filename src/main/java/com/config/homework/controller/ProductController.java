@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/product")
@@ -47,6 +48,35 @@ public class ProductController {
         ApiResponse<List<ProductResponse>> response = ApiResponse.<List<ProductResponse>>builder()
                 .message("Get all products successfully.")
                 .payload(productService.getAllProducts(page, size, sortBy, direction))
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get product by id.")
+    private ResponseEntity<ApiResponse<ProductResponse>> getProduct(@PathVariable UUID id) {
+        ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
+                .message("Get product with id ("+id+") successfully.")
+                .payload(productService.getProductById(id))
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update product by id.")
+    private ResponseEntity<ApiResponse<ProductResponse>> updateProduct(
+            @PathVariable UUID id,
+            @Valid @RequestBody ProductRequest productRequest
+    ) {
+        ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
+                .message("Product id ("+id+") is updated successfully.")
+                .payload(productService.updateProductById(id, productRequest))
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .timestamp(LocalDateTime.now())

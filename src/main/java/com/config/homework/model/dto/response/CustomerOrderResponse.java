@@ -2,6 +2,7 @@ package com.config.homework.model.dto.response;
 
 import lombok.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -15,4 +16,5 @@ public class CustomerOrderResponse {
     private String address;
     private String phoneNumber;
     private EmailResponse email;
+    private Set<OrderResponse> orderList;
 }

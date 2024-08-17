@@ -1,11 +1,11 @@
 package com.config.homework.model.entities;
 
-import com.config.homework.model.dto.response.CustomerResponse;
-import com.config.homework.model.dto.response.EmailResponse;
+import com.config.homework.model.dto.response.*;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+
+import java.util.Set;
 import java.util.UUID;
 
 @Setter
@@ -30,11 +30,16 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Order> orders;
+    private Set<Order> orders;
 
     public CustomerResponse toResponse(){
         EmailResponse emailResponse = email.toResponse();
         return new CustomerResponse(this.id, this.name, this.address,this.phoneNumber, emailResponse);
+    }
+
+    public CustomerOrderResponse toOrderResponse(Set<OrderResponse> orderResponses){
+        EmailResponse emailResponse = email.toResponse();
+        return new CustomerOrderResponse(this.id, this.name, this.address,this.phoneNumber, emailResponse,orderResponses);
     }
 
 }

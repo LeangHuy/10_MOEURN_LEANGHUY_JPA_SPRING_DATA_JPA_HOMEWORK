@@ -16,10 +16,10 @@ public class ProductOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     public UUID id;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     private Product product;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     private Order order;
     @Column(nullable = false)

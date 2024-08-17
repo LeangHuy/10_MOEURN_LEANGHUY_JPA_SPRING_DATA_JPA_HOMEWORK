@@ -59,6 +59,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Set<OrderResponse> getAllOrdersByCustomerId(UUID customerId) {
         Set<Order> orders = orderRepository.findByCustomerId(customerId);
+        if (orders.isEmpty()) {
+            throw new NotFoundException("Customer id: " + customerId+" doesn't order yet.");
+        }
         Set<OrderResponse> orderResponses = new HashSet<>();
         Product product;
         for (Order order : orders) {

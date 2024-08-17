@@ -10,9 +10,13 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
+@ToString
 public class ProductResponse {
     private UUID id;
     private String productName;
-    private BigDecimal unitPrice;
+    private double unitPrice;
     private String description;
+
+    public ProductResponse(UUID id) {
+    }
 }

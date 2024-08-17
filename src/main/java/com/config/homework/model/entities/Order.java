@@ -1,31 +1,36 @@
 package com.config.homework.model.entities;
 
+import com.config.homework.model.dto.response.OrderResponse;
+import com.config.homework.model.dto.response.ProductResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Entity(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Temporal(TemporalType.DATE)
-    private Date orderDate;
-    @Column(nullable = false,precision = 10,scale = 2)
-    private BigDecimal totalAmount;
+    private LocalDate orderDate;
+    @Column(nullable = false)
+    private double totalAmount;
     @Column(nullable = false)
     private String status;
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customer;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<ProductOrder> productOrders;
+    @OneToMany(mappedBy = "order",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<ProductOrder> productOrders;
+
+    public OrderResponse toResponse(Set<ProductResponse> productOrders) {
+        return new OrderResponse(this.id,this.orderDate,this.totalAmount,this.status,productOrders);
+    }
 }

@@ -20,7 +20,7 @@ public class ProductRequest {
     @NotBlank
     private String productName;
     @Min(value = 0, message = "Unit price must be positive")
-    private BigDecimal unitPrice;
+    private double unitPrice;
     @NotNull
     @NotBlank
     private String description;

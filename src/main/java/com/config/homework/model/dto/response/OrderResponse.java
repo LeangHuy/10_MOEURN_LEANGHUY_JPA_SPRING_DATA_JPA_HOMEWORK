@@ -2,6 +2,8 @@ package com.config.homework.model.dto.response;
 
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -9,6 +11,11 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
+@ToString
 public class OrderResponse {
-    public UUID id;
+    private UUID id;
+    private LocalDate orderDate;
+    private double totalAmount;
+    private String status;
+    private Set<ProductResponse> productList;
 }
